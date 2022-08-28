@@ -283,18 +283,6 @@ const res = convert(500, usdCurr);
 promotion(res);
 
 
-
-function test() {
-    for (let i = 0; i < 5; i++) {
-        console.log(i);
-        if (i === 3) return
-    }
-    console.log('Done');
-}
-
-test();
-
-
 function doNothing() {
 };
 console.log(doNothing() === undefined);
@@ -326,8 +314,8 @@ getMathResult(5, 3);
 
 function makeOrderMessage(orderedQuantity, pricePerDroid, deliveryFee) {
     let totalPrice = orderedQuantity * pricePerDroid;
-    let message = `You ordered droids worth ${totalPrice} credits. Delivery (${deliveryFee} credits) is included in total price.`;
-
+    let message = `You ordered droids worth ${totalPrice} credits. Delivery (${deliveryFee} credits) 
+    is included in total price.`;
     return message;
 }
 makeOrderMessage(2, 100, 50);
@@ -365,7 +353,6 @@ function getSubscriptionPrice(type) {
 
     return price;
 }
-
 
 function checkPassword(password) {
     const ADMIN_PASSWORD = "jqueryismyjam";
@@ -413,13 +400,11 @@ function getShippingCost(country) {
     return message;
 }
 
-
 function getSubstring(string, length) {
     const substring = string.slice(0, length);
 
     return substring;
 }
-
 
 function formatMessage(message, maxLength) {
     let result;
@@ -437,21 +422,16 @@ function normalizeInput(input) {
     return normalizedInput;
 }
 
-
 function checkForName(fullName, name) {
     const result = fullName.includes(name);
     return result;
 }
-
 
 function checkForSpam(message) {
     let result;
     result = message.toLowerCase().includes('sale') || message.toLowerCase().includes('spam');
     return result;
 }
-
-
-
 
 function getExtremeElements(array) {
 
@@ -465,9 +445,6 @@ function getExtremeElements(array) {
 }
 getExtremeElements(["Earth", "Mars", "Venus"]);
 
-
-
-
 function calculateEngravingPrice(message, pricePerWord) {
     let words = message.split(" ");
     let sumWord = words.length *= pricePerWord;
@@ -475,39 +452,6 @@ function calculateEngravingPrice(message, pricePerWord) {
 }
 
 calculateEngravingPrice("JavaScript is in my blood", 20);
-
-function slugify(title) {
-    return title.toLowerCase()
-        .trim()
-        .split(" ")
-        .join("-");
-}
-slugify("Arrays for begginers");
-
-
-function makeArray(firstArray, secondArray, maxLength) {
-    let newArray = firstArray.concat(secondArray);
-    let sliceArray = newArray.slice(0, maxLength);
-    if (newArray.length > maxLength) {
-        return sliceArray;
-    }
-    console.log(newArray.length);
-    return newArray;
-}
-
-makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3);
-
-function calculateTotalPrice(order) {
-    let total = 0;
-    for (let i = 0; i < order.length; i++) {
-        total += order[i];
-    }
-    return total;
-}
-
-calculateTotalPrice([12, 85, 37, 4]);
-
-
 
 function createArrayOfNumbers(min, max) {
     const numbers = [];
@@ -520,20 +464,88 @@ function createArrayOfNumbers(min, max) {
 createArrayOfNumbers(1, 3);
 
 
-function filterArray(numbers, value) {
 
-    let newArray = [];
-    for (let i = value += 1; i <= numbers.length; i++) {
-        console.log(i);
-        newArray.push(i);
-    }
-    console.log(newArray);
-    return newArray;
-
+//Напиши функцию slugify(title) которая принимает заголовок статьи, параметр title, и возвращает slug, 
+//созданный из этой строки.
+//Значением параметра title будут строки, слова которых разделены только пробелами
+//Все символы slug должны быть в нижнем регистре
+//Все слова slug должна быть разделены тире
+function slugify(title) {
+    return title.toLowerCase()
+        .trim()
+        .split(" ")
+        .join("-");
 }
+slugify("Arrays for begginers");
 
-filterArray([1, 2, 3, 4, 5], 3);
+//Напиши функцию makeArray(firstArray, secondArray, maxLength) для создания нового массива со всеми элементами двух 
+//исходных firstArray и secondArray.
+//Параметр maxLength содержит максимально допустимую длину нового массива.
+//Если количество элементов нового массива больше maxLength, функция должна вернуть копию массива длиной maxLength.
+//В противном случае функция должна вернуть новый массив целиком.
+function makeArray(firstArray, secondArray, maxLength) {
+    let newArray = firstArray.concat(secondArray);
+    let sliceArray = newArray.slice(0, maxLength);
+    if (newArray.length > maxLength) {
+        return sliceArray;
+    }
+    console.log(newArray.length);
+    return newArray;
+}
+makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2);
 
+//Напиши функцию calculateTotalPrice(order), которая принимает один параметр order - массив чисел, 
+//и рассчитывает общую сумму его элементов. 
+//Общая сумма элементов должна сохраняться в переменной total, которая возвращается, как результат работы функции.
+function calculateTotalPrice(order) {
+    let total = 0;
+    for (let i = 0; i < order.length; i++) {
+        total += order[i];
+    }
+    return total;
+}
+calculateTotalPrice([412, 371, 94, 63, 176]);
+
+//Напиши функцию findLongestWord(string) которая принимает произвольную строку состоящую только из слов разделённых 
+//пробелом(параметр string) и возвращает самое длинное слово в этой строке.
+function findLongestWord(string) {
+    return string
+        .split(/\W+/)
+        .reduce(
+            function (longest, word) {
+                return word.length > longest.length ? word : longest;
+            }
+        );
+}
+findLongestWord("Google do a roll");
+
+//Напиши функцию filterArray(numbers, value), которая принимает массив чисел (параметр numbers) и возвращает 
+//новый массив, в котором будут только те элементы массива numbers, которые больше чем значение параметра value(число).
+function filterArray(numbers, value) {
+    const newArray = [];
+    for (const number of numbers) {
+        if (number > value) { newArray.push(number); }
+    }
+    return newArray;
+}
+filterArray([12, 24, 8, 41, 76], 38);
+
+
+//Напиши функцию getCommonElements(array1, array2) которая получает два массива произвольной длины в параметры array1 
+//и array2, и возвращает новый массив, состоящий из тех элементов, которые присутствуют в обоих исходных массивах.
+function getCommonElements(array1, array2) {
+    const newArray = [];
+    for (let i = 0; i <= array2.length; i++) {
+        if (array2.includes(array1[i])) {
+            newArray.push(array1[i]);
+        }
+    }
+    return newArray;
+}
+getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]);
+
+//Напиши функцию getEvenNumbers(start, end) которая возвращает массив всех чётных чисел от start до end. 
+//Чётным считается число которое делится на 2 без остатка(10 % 2 === 0).
 function getEvenNumbers(start, end) {
     const newArray = [];
     for (let i = start; i <= end; i++) {
@@ -541,20 +553,94 @@ function getEvenNumbers(start, end) {
             newArray.push(i);
         }
     }
-    console.log(newArray);
     return newArray;
 }
+getEvenNumbers(6, 12);
 
-
-function filterArray(numbers, value) {
-        const newArray = [];
-    for (let i = 0; i <= numbers.length; i++) {
-        console.log(i);
-        if (numbers[i] > value) { newArray.push(numbers[i]); }
+//Напиши функцию includes(array, value), которая делает тоже самое, что и метод массива массив.includes(значение) - 
+//проверяет, есть ли в массиве array значение value, возвращая true если есть и false в противном случае.
+function includes(array, value) {
+    for (let i of array) {
+        if (value === i) {
+            return true;
+        }
     }
-    console.log(newArray);
-        return newArray;
+    return false;
 }
+includes([1, 2, 3, 4, 5], 3);
 
-filterArray([12, 24, 8, 41, 76], 20);
+// Напиши функцию calculateTotal(number), которая принимает целое число(параметр number) и возвращает сумму 
+//всех целых чисел от единицы и до этого числа.
+function calculateTotal(number) {
+    let sum = 0;
+    for (let i = 0; i <= number; i++) {
+        sum += i;
+    }
+    return sum;
+
+}
+calculateTotal(24);
+
+// Вычислить общий процент прогресса со всех доступных курсов
+let students = {
+    js: [{
+        name: 'John',
+        progress: 100
+    }, {
+        name: 'Ivan',
+        progress: 60
+    }],
+
+    html: {
+        basic: [{
+            name: 'Peter',
+            progress: 20
+        }, {
+            name: 'Ann',
+            progress: 18
+        }],
+        pro: [{
+
+            name: 'Sam',
+            progress: 10
+
+        }]
+    }
+};
+
+function getTotalProgressByIteration(data) {
+    let total = 0;
+    let students = 0;
+
+
+    for (let course of Object.values(data)) {
+        if (Array.isArray(course)) {
+            students += course.length;
+
+            for (let i = 0; i, course.length; i++) {
+                total += course[i].progress;
+            }
+        } else {
+            for (let subCourse of Object.values(course)) {
+                students += subCourse.length;
+
+                for (let i = 0; i, subCourse.length; i++) {
+                    total += subCourse[i].progress;
+                }
+            }
+        }
+        return total / students;
+    }
+};
+
+console.log(getTotalProgressByIteration(students));
+
+// Возвести число в степень при помощи рекурсии
+function pow(x, n) {
+    if (n === 1) {
+        return x;
+    } else {
+        return x * pow(x, n - 1);
+    }
+}
 */
