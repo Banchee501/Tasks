@@ -1,2 +1,2 @@
 # Tasks
-My completed tasks
+My completed tasks on Javascript on Сodewars and others
